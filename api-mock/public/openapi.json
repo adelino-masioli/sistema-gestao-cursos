@@ -1,0 +1,699 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "API de Cursos e Inscrições",
+    "description" : "Esta API fornece acesso aos cursos disponíveis e suas respectivas inscrições.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:3000",
+    "description" : "Local development server"
+  } ],
+  "paths" : {
+    "/cursos" : {
+      "get" : {
+        "summary" : "Obtém a lista completa de cursos",
+        "parameters" : [ {
+          "name" : "modalidade",
+          "in" : "query",
+          "description" : "Filtrar por modalidade",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "periodo",
+          "in" : "query",
+          "description" : "Filtrar por período",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "local",
+          "in" : "query",
+          "description" : "Filtrar por local",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "_start",
+          "in" : "query",
+          "description" : "Índice de início dos resultados",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_end",
+          "in" : "query",
+          "description" : "Índice final dos resultados",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_limit",
+          "in" : "query",
+          "description" : "Número máximo de resultados",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_page",
+          "in" : "query",
+          "description" : "Número da página",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_per_page",
+          "in" : "query",
+          "description" : "Itens por página",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_sort",
+          "in" : "query",
+          "description" : "Campo(s) para ordenação",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista de cursos",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Curso"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Adiciona um novo curso",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Curso"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Curso criado com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Curso"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cursos/{id}" : {
+      "get" : {
+        "summary" : "Obtém detalhes de um curso específico pelo ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID do curso",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Detalhes do curso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Curso"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Curso não encontrado"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Atualiza todas as informações de um curso existente",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID do curso",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Curso"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Curso atualizado com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Curso"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Curso não encontrado"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Remove um curso existente",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID do curso",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Curso removido com sucesso"
+          },
+          "404" : {
+            "description" : "Curso não encontrado"
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Atualiza informações parciais de um curso existente",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID do curso",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CursoParcial"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Curso atualizado com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Curso"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Curso não encontrado"
+          }
+        }
+      }
+    },
+    "/inscricoes" : {
+      "get" : {
+        "summary" : "Obtém a lista completa de inscrições",
+        "parameters" : [ {
+          "name" : "situacao",
+          "in" : "query",
+          "description" : "Filtrar por situação",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "curso_numero",
+          "in" : "query",
+          "description" : "Filtrar por número do curso",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "_start",
+          "in" : "query",
+          "description" : "Índice de início dos resultados",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_limit",
+          "in" : "query",
+          "description" : "Número máximo de resultados",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_page",
+          "in" : "query",
+          "description" : "Número da página",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_per_page",
+          "in" : "query",
+          "description" : "Itens por página",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "_sort",
+          "in" : "query",
+          "description" : "Campo(s) para ordenação",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista de inscrições",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Inscricao"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Adiciona uma nova inscrição",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Inscricao"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Inscrição criada com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inscricoes/{id}" : {
+      "get" : {
+        "summary" : "Obtém detalhes de uma inscrição específica pelo ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da inscrição",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Detalhes da inscrição",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Inscrição não encontrada"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Atualiza todas as informações de uma inscrição existente",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da inscrição",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Inscricao"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Inscrição atualizada com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Inscrição não encontrada"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Remove uma inscrição existente",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da inscrição",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Inscrição removida com sucesso"
+          },
+          "404" : {
+            "description" : "Inscrição não encontrada"
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Atualiza informações parciais de uma inscrição existente",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "ID da inscrição",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/InscricaoParcial"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Inscrição atualizada com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Inscrição não encontrada"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Curso" : {
+        "required" : [ "curso_numero", "designacao", "fim_previsto", "inicio_previsto", "local", "modalidade", "periodo" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "example" : "12"
+          },
+          "modalidade" : {
+            "type" : "string",
+            "example" : "Vida Ativa Desempregados (Adultos)"
+          },
+          "curso_numero" : {
+            "type" : "string",
+            "example" : "25.0999"
+          },
+          "designacao" : {
+            "type" : "string",
+            "example" : "Desenvolvimento Web Full-Stack"
+          },
+          "inicio_previsto" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "0006-11-15"
+          },
+          "fim_previsto" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "0037-04-16"
+          },
+          "local" : {
+            "type" : "string",
+            "example" : "SFG1"
+          },
+          "periodo" : {
+            "type" : "string",
+            "example" : "Manhã"
+          },
+          "inscrever" : {
+            "type" : "string",
+            "example" : ""
+          },
+          "obs" : {
+            "type" : "string",
+            "example" : "Novo curso"
+          }
+        }
+      },
+      "CursoParcial" : {
+        "type" : "object",
+        "properties" : {
+          "modalidade" : {
+            "type" : "string"
+          },
+          "curso_numero" : {
+            "type" : "string"
+          },
+          "designacao" : {
+            "type" : "string"
+          },
+          "inicio_previsto" : {
+            "type" : "string"
+          },
+          "fim_previsto" : {
+            "type" : "string"
+          },
+          "local" : {
+            "type" : "string"
+          },
+          "periodo" : {
+            "type" : "string"
+          },
+          "inscrever" : {
+            "type" : "string"
+          },
+          "obs" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Inscricao" : {
+        "required" : [ "cc", "curso_numero", "data_inscricao", "email", "id_iefp", "nome", "situacao", "telemovel" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "nome" : {
+            "type" : "string",
+            "example" : "João Silva"
+          },
+          "id_iefp" : {
+            "type" : "string",
+            "example" : "PT12345678"
+          },
+          "cc" : {
+            "type" : "string",
+            "example" : "12345678"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "joao.silva@email.com"
+          },
+          "telemovel" : {
+            "type" : "string",
+            "example" : "912345678"
+          },
+          "idade" : {
+            "type" : "integer",
+            "example" : 28
+          },
+          "escolaridade" : {
+            "type" : "string",
+            "example" : "Ensino Superior"
+          },
+          "curso_numero" : {
+            "type" : "string",
+            "example" : "25.0140"
+          },
+          "situacao" : {
+            "type" : "string",
+            "example" : "Desempregado"
+          },
+          "data_inscricao" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "0020-09-14"
+          }
+        }
+      },
+      "InscricaoParcial" : {
+        "type" : "object",
+        "properties" : {
+          "nome" : {
+            "type" : "string"
+          },
+          "id_iefp" : {
+            "type" : "string"
+          },
+          "cc" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "telemovel" : {
+            "type" : "string"
+          },
+          "idade" : {
+            "type" : "integer"
+          },
+          "escolaridade" : {
+            "type" : "string"
+          },
+          "curso_numero" : {
+            "type" : "string"
+          },
+          "situacao" : {
+            "type" : "string"
+          },
+          "data_inscricao" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
