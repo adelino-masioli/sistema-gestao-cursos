@@ -29,13 +29,13 @@ Uma aplicação web desenvolvida em **React**, com **Vite** e **Tailwind CSS**, 
 
 ## 📸 Capturas de Tela
 
-| Página                         | Imagem                                            |
-| ------------------------------ | ------------------------------------------------- |
-| 📜 **API Swagger**             | ![Swagger API](public/screenshot/api-swagger.png) |
-| 🏠 **Página Inicial**          | ![Home](public/screenshot/homepage.png)           |
-| ➕ **Carregar Mais**           | ![Load More](public/screenshot/load-more.png)     |
-| 🔍 **Filtragem**               | ![Filter](public/screenshot/filter.png)           |
-| 📝 **Formulário de Inscrição** | ![Form](public/screenshot/form-subscription.png)  |
+| Página                         | Imagem                                                       |
+| ------------------------------ | ------------------------------------------------------------ |
+| 📜 **API Swagger**             | ![Swagger API](cursos-app/public/screenshot/api-swagger.png) |
+| 🏠 **Página Inicial**          | ![Home](cursos-app/public/screenshot/homepage.png)           |
+| ➕ **Carregar Mais**           | ![Load More](cursos-app/public/screenshot/load-more.png)     |
+| 🔍 **Filtragem**               | ![Filter](cursos-app/public/screenshot/filter.png)           |
+| 📝 **Formulário de Inscrição** | ![Form](cursos-app/public/screenshot/form-subscription.png)  |
 
 ---
 
